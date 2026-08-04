@@ -1,0 +1,62 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f8fafc;
+  color: #111827;
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Poppins", sans-serif;
+}
+
+::selection {
+  background-color: #d8f6e0;
+  color: #0b542a;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f8fafc;
+}
+::-webkit-scrollbar-thumb {
+  background: #b4edc6;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #82dfa3;
+}
+
+.container-app {
+  @apply mx-auto w-full max-w-[1280px] px-6 md:px-10;
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 font-heading text-sm font-semibold text-white shadow-float transition-all duration-300 hover:bg-primary-600 hover:shadow-lg active:scale-95;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center gap-2 rounded-full border border-dark/10 bg-white px-7 py-3.5 font-heading text-sm font-semibold text-dark transition-all duration-300 hover:border-primary/30 hover:bg-primary-50 active:scale-95;
+}
+
+.section-eyebrow {
+  @apply mb-3 inline-flex items-center gap-2 rounded-full bg-primary-50 px-4 py-1.5 font-heading text-xs font-semibold uppercase tracking-wider text-primary-700;
+}
+
+.card-float {
+  @apply rounded-xl4 bg-white shadow-card transition-all duration-500 hover:-translate-y-1.5 hover:shadow-float;
+}
