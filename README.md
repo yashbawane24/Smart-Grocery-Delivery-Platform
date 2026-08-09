@@ -1,4 +1,4 @@
-# Farmly — Grocery Delivery Platform
+# Farmly  Grocery Delivery Platform
 
 A full-stack grocery delivery platform: React 19 + Vite + Tailwind on the
 frontend, Node.js/Express + PostgreSQL on the backend.
