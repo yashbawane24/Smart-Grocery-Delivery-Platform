@@ -63,7 +63,9 @@ export default function AuthModal({ isOpen, onClose, onAuthSuccess }) {
       if (onAuthSuccess) onAuthSuccess(res.data.user);
       onClose();
     } catch (err) {
-      toast.error(err.response?.data?.message || "Authentication failed. Check your credentials.");
+      const firstValidationError = err.response?.data?.errors?.[0]?.message;
+      const errorMessage = firstValidationError || err.response?.data?.message || "Authentication failed. Check your credentials.";
+      toast.error(errorMessage);
     } finally {
       setLoading(false);
     }

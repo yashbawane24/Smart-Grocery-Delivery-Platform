@@ -12,7 +12,7 @@ const UserModel = {
   },
 
   async findByEmail(email) {
-    const { rows } = await query("SELECT * FROM users WHERE email = $1", [email]);
+    const { rows } = await query("SELECT * FROM users WHERE LOWER(email) = LOWER($1)", [email]);
     return rows[0];
   },
 

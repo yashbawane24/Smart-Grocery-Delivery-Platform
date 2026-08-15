@@ -250,9 +250,32 @@ async function seedInitialData(poolInstance) {
   }
 }
 
-activePool = createInMemoryDb();
-seedInitialData(activePool);
+let seedPromise = null;
 
-const query = (text, params) => activePool.query(text, params);
+async function initDb() {
+  if (process.env.DATABASE_URL) {
+    try {
+      const pgPool = new Pool({ connectionString: process.env.DATABASE_URL, connectionTimeoutMillis: 2000 });
+      await pgPool.query("SELECT 1");
+      console.log("✔ Connected to PostgreSQL database.");
+      activePool = pgPool;
+      return;
+    } catch (err) {
+      console.warn("PostgreSQL connection failed, using in-memory database fallback:", err.message);
+    }
+  }
 
-module.exports = { pool: activePool, query };
+  activePool = createInMemoryDb();
+  await seedInitialData(activePool);
+}
+
+seedPromise = initDb();
+
+const query = async (text, params) => {
+  if (seedPromise) {
+    await seedPromise;
+  }
+  return activePool.query(text, params);
+};
+
+module.exports = { get pool() { return activePool; }, query };

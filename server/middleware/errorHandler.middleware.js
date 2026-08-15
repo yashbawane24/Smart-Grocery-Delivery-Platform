@@ -4,7 +4,9 @@ const ApiError = require("../utils/ApiError");
 const errorHandler = (err, req, res, next) => {
   let error = err;
 
-  if (!(error instanceof ApiError)) {
+  if (err.name === "JsonWebTokenError" || err.name === "TokenExpiredError") {
+    error = new ApiError(401, "Not authorized, token invalid or expired");
+  } else if (!(error instanceof ApiError)) {
     const statusCode = error.statusCode || 500;
     error = new ApiError(statusCode, error.message || "Internal server error");
   }
